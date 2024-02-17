@@ -1,0 +1,20 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Create Post</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Post</ion-label>
+    <ion-textarea [(ngModel)]="postContent" placeholder="What's on your mind?"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Upload Image</ion-label>
+    <input type="file"#photoSelector (change)="onPhotoSelected(photoSelector)"
+    id="photo-upload" type="file" accept="image/*" >
+  </ion-item>
+
+  <ion-button expand="full" (click)="onPostClick()" >Post</ion-button>
+</ion-content>

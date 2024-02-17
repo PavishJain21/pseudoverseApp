@@ -1,0 +1,53 @@
+
+<ion-content class="ion-padding" >
+  <!-- Post Section -->
+  <div class="post-container">
+    <div class="post">
+      <div class="post-author">
+        <ion-item *ngIf="postData?.imageUrl" class="post-item">
+          <ion-img 
+          src="{{postData?.imageUrl}}"></ion-img>
+          </ion-item>
+        <ion-label class="post-content">
+          <span class="author-name"> {{postData.userName}}</span>
+        </ion-label>
+  
+      </div>
+      <div class="post-content">
+        <ion-label class="post-content">
+          <h3> {{postData.content}}</h3>
+        </ion-label>
+        <ion-button (click)="likePost()" color="danger" fill="clear">
+          <ion-icon name="heart"></ion-icon>
+          1
+        </ion-button>
+        <ion-button (click)="onReplyClick()" color="dark" fill="clear">
+          <ion-icon name="chatbubbles"></ion-icon>
+        </ion-button>
+        <ion-button (click)="sharePost()" style="float: right;" color="dark" fill="clear">
+          <ion-icon name="paper-plane"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Replies Section -->
+  <div class="replies-container">
+    <div class="reply" *ngFor="let comment of comments">
+      <div class="reply-author">
+        <ion-avatar>
+          <!-- <img [src]="" alt="Author"> -->
+        </ion-avatar>
+        <ion-label class="post-content">
+          <span class="author-name">{{ comment?.creatorName }}</span>
+        </ion-label>
+
+      </div>
+      <div class="reply-content">
+        <ion-label class="post-content">
+          <p>{{ comment?.comment }}</p>
+        </ion-label>
+      </div>
+    </div>
+  </div>
+</ion-content>

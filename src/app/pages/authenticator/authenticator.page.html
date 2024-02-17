@@ -1,0 +1,92 @@
+<!-- <ion-header>
+	<ion-toolbar color="primary">
+		<ion-title>{{getStateText()}}</ion-title>
+	</ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-text-center">
+
+
+		<div  *ngIf="isLoginState()" class="input-group ">
+			<ion-item>
+				<ion-input #loginEmail  type="email" placeholder="Email" ></ion-input>
+			</ion-item>
+			<!-- <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+				<span *ngIf="email.errors?.required">Email is required</span>
+				<span *ngIf="email.errors?.email">Email is invalid</span>
+			</div> -->
+			<ion-item>
+				<ion-input #loginPassword type="password" placeholder="Password"></ion-input>
+			</ion-item>
+
+            
+            <ion-button mat-flat-button
+            (click)="onLogin(loginEmail, loginPassword)">Login</ion-button>
+
+			<!-- <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+				<span *ngIf="password.errors?.required">Password is required</span>
+				<span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+			</div> -->
+		</div>
+
+        <div *ngIf="isRegisterState()" class="input-group">
+			<ion-item>
+				<ion-input #registerEmail  type="email" placeholder="Email" ></ion-input>
+			</ion-item>
+			<!-- <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+				<span *ngIf="email.errors?.required">Email is required</span>
+				<span *ngIf="email.errors?.email">Email is invalid</span>
+			</div> -->
+			<ion-item>
+				<ion-input  #registerPassword type="password" placeholder="Password"></ion-input>
+			</ion-item>
+
+            <ion-item>
+				<ion-input  #registerConfirmPassword type="Password" placeholder="Confirm Password"></ion-input>
+			</ion-item>
+
+            <ion-button mat-flat-button
+            (click)="onRegisterClick(registerEmail,
+            registerPassword,
+            registerConfirmPassword)">Register</ion-button>
+			<!-- <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+				<span *ngIf="password.errors?.required">Password is required</span>
+				<span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+			</div> -->
+		</div>
+
+        <div    *ngIf="isForgotPasswordState()" class="input-group">
+			<ion-item>
+				<ion-input #resetEmail  type="email" placeholder="Reset Email" ></ion-input>
+			</ion-item>
+			<!-- <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+				<span *ngIf="email.errors?.required">Email is required</span>
+				<span *ngIf="email.errors?.email">Email is invalid</span>
+			</div> -->
+            <ion-button mat-flat-button
+            (click)="onResetClick(resetEmail)" >Reset Password </ion-button>
+			<!-- <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+				<span *ngIf="password.errors?.required">Password is required</span>
+				<span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+			</div> -->
+		</div>
+     
+		<ion-button (click)="onCreateAccountClick()" *ngIf="!isRegisterState()" type="button" expand="block" color="light" fill="clear"
+			>Not yet a member? Sign up!
+		</ion-button>
+
+
+        <ion-button mat-flat-button *ngIf="!isForgotPasswordState()"
+        (click)="onForgotPasswordClick()">Forgot Password</ion-button>
+        <ion-button mat-flat-button *ngIf="!isLoginState()"
+        (click)="onLoginClick()">Login</ion-button>
+
+		<!-- <ion-button type="button" expand="block" color="tertiary">
+			<ion-icon name="logo-google" slot="start"></ion-icon>
+			Sign in with Google
+		</ion-button>
+		<ion-button type="button" expand="block" color="tertiary">
+			<ion-icon name="logo-apple" slot="start"></ion-icon>
+			Sign in with Apple
+		</ion-button> -->
+</ion-content>

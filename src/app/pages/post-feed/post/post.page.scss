@@ -1,0 +1,26 @@
+/* src/app/forum/forum.component.scss */
+.post-item {
+  
+    ion-avatar{
+        margin-right: 1px  !important;
+    }
+
+    .post-content {
+      margin-left: 0px !important;
+    }
+  
+    ion-button {
+      margin-left: auto;
+    }
+   
+  }
+
+  .img-user{
+    max-width: 52% !important;
+    max-height: 50%!important;
+    margin-top: 10px!important;
+ } 
+  
+ app-reply {
+  display: block;
+}

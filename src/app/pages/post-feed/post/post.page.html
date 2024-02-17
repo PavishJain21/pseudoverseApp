@@ -1,0 +1,48 @@
+<!-- <ion-item>
+  <ion-avatar slot="start">
+    <img src="{{postData?.imageUrl}}">
+  </ion-avatar>
+  <ion-label>
+    <h2>{{ creatorName }}</h2>
+    <p>{{ creatorDescription }}</p>
+  </ion-label>
+  <ion-button (click)="likePost()" color="primary" expand="full">
+    Like 1
+  </ion-button>
+  <ion-button (click)="onReplyClick()" color="secondary" expand="full">
+    Comment
+  </ion-button>
+  <ion-button (click)="sharePost()" color="tertiary" expand="full">
+    Share
+  </ion-button>
+</ion-item> -->
+
+
+
+<ion-item>
+  <ion-avatar>
+    <img class="img-user" src="../../../../assets/icon/user.png">
+  </ion-avatar>
+  <p>{{creatorName }}</p>
+</ion-item>
+<ion-item *ngIf="postData?.imageUrl" class="post-item">
+  <ion-img src="{{postData?.imageUrl}}"></ion-img>
+</ion-item>
+
+<ion-item class="post-item">
+  <ion-label class="post-content" (click)="postRedirection()">
+    <h3>{{ postData?.comment}}</h3>
+  </ion-label>
+</ion-item>
+
+<ion-button (click)="likePost()" color="danger" fill="clear">
+  <ion-icon name="heart"></ion-icon>
+  1
+</ion-button>
+<ion-button (click)="onReplyClick()" color="dark" fill="clear">
+  <ion-icon name="chatbubbles"></ion-icon>
+</ion-button>
+<ion-button (click)="sharePost()" color="dark" fill="clear">
+  <ion-icon name="paper-plane"></ion-icon>
+</ion-button>
+<app-reply *ngIf="isCommentClicked" (isCommented)="isCheckCommented($event)" [postId]="postData.postId"></app-reply>
