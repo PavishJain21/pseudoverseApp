@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { FirebaseTSFirestore, Limit, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 
@@ -12,14 +14,29 @@ import { NgNavigatorShareService } from 'ng-navigator-share';
 export class PostFeedPage implements OnInit {
   firestore = new FirebaseTSFirestore();
   posts: PostData [] = [];
-  constructor(private dialog: MatDialog,private router:Router,private ngNavigatorShareService: NgNavigatorShareService,) { }
+  auth = new FirebaseTSAuth();
+
+  constructor(private dialog: MatDialog,private router:Router,private ngNavigatorShareService: NgNavigatorShareService,
+    private location:Location) { }
 
   ngOnInit(): void {
     this.getPosts();
   }
 
+  onLogoutClick(){
+   this.auth.signOut();
+   this.router.navigate(['/login']);
+  }
+
+  onLogin(){
+    this.router.navigate(['/login']);
+  }
+
   onCreatePostClick(){
     //this.dialog.open(CreatePostComponent);
+  }
+  back(){
+   this.location.back();
   }
 
   getPosts(){

@@ -1,23 +1,40 @@
- <ion-header>
+ <ion-header *ngIf="!loggedIn()">
    <ion-toolbar>
-      <ion-title>
+      <ion-title >
         Welcome to Pseudoverse
       </ion-title>
-      <ion-buttons *ngIf="isSignedIn"  (click)="back()" slot="start">
-        <ion-button>
-          <ion-icon name="arrow-back"></ion-icon>
-          Back
-        </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button  *ngIf="isSignedIn"  (click)="onLogoutClick()">
-          Logout
-        </ion-button>
-        
-      </ion-buttons>
+      <!-- <ion-title>
+          Feed
+      </ion-title> -->
+      <!-- <ion-buttons slot="end">
+      <ion-button  *ngIf="!loggedIn()"  (click)="onLoginClick()">
+         Login
+       </ion-button>
+     </ion-buttons> -->
     </ion-toolbar>
   </ion-header>
- 
+  <ion-header *ngIf="loggedIn()">
+    <ion-toolbar>
+       <ion-title >
+        Feed
+       </ion-title>
+       <!-- <ion-title>
+           Feed
+       </ion-title> -->
+       <ion-buttons slot="end">
+         <ion-button  *ngIf="loggedIn()"  (click)="onLogoutClick()">
+           Logout
+         </ion-button>
+       </ion-buttons>
+       <ion-buttons slot="end">
+        <ion-button  *ngIf="!loggedIn()"  (click)="onLoginClick()">
+          Login
+        </ion-button>
+      </ion-buttons>
+     </ion-toolbar>
+   </ion-header>
+  <ion-app>
+    <ion-router-outlet></ion-router-outlet>
+    <app-tabs *ngIf="loggedIn()"></app-tabs>
+  </ion-app>
 
-<ion-router-outlet></ion-router-outlet>
-<app-tabs  *ngIf="isSignedIn"></app-tabs>

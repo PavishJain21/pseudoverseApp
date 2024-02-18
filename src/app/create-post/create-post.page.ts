@@ -6,6 +6,7 @@ import { FirebaseTSStorage } from 'firebasets/firebasetsStorage/firebaseTSStorag
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 import { IonInput } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-post',
@@ -18,7 +19,7 @@ export class CreatePostPage implements OnInit {
   auth = new FirebaseTSAuth();
   firestore = new FirebaseTSFirestore();
   storage = new FirebaseTSStorage();
-  constructor(private router:Router) { }
+  constructor(private router:Router,private location:Location) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +34,9 @@ export class CreatePostPage implements OnInit {
     }
    
   }
-
+  back(){
+    this.location.back();
+  }
   uploadImagePost(comment: string){
     let postId = this.firestore.genDocId();
     this.storage.upload(

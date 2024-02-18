@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { IonInput } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-authenticator',
   templateUrl: './authenticator.page.html',
@@ -10,10 +11,9 @@ import { IonInput } from '@ionic/angular';
 export class AuthenticatorPage implements OnInit {
   state = AuthenticatorCompState.LOGIN;
   firebasetsAuth: FirebaseTSAuth;
-
-  constructor() { 
+  isLoggedIn:boolean=false;
+  constructor(private router:Router) { 
     this.firebasetsAuth = new FirebaseTSAuth();
-    
   }
 
   ngOnInit() { 
@@ -47,7 +47,9 @@ export class AuthenticatorPage implements OnInit {
           email: email,
           password: password,
           onComplete: (uc) => {
+            
             this.state = AuthenticatorCompState.LOGIN;
+            this.router.navigate(['/postfeed'])
           },
           onFail: (err) => {
             alert(err);

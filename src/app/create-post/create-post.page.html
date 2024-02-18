@@ -1,9 +1,16 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>Create Post</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
+     <ion-title>
+         Create Post
+     </ion-title>
+     <ion-buttons (click)="back()" slot="start">
+       <ion-button>
+         <ion-icon name="arrow-back"></ion-icon>
+         Back
+       </ion-button>
+     </ion-buttons>
+   </ion-toolbar>
+ </ion-header>
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="stacked">Post</ion-label>

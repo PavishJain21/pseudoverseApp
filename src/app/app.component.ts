@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { Location } from '@angular/common';
 @Component({
@@ -16,11 +16,12 @@ export class AppComponent {
   firestore = new FirebaseTSFirestore();
   userHasProfile = true;
   islogginClick=false;
+  path:string='';
   private static userDocument: UserDocument;
 
   constructor(
       private router: Router,
-      private location:Location
+      private location:Location,
     ){
     this.auth.listenToSignInStateChanges(
       user => {
@@ -31,7 +32,6 @@ export class AppComponent {
           {
             whenSignedIn: user => {
               this.isSignedIn=true;
-              this.router.navigate(["postfeed"]);
             },
             whenSignedOut: user => {
               this.isSignedIn=false;
@@ -51,6 +51,11 @@ export class AppComponent {
         );
       }
     );
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationStart) {
+        this.path=event.url;
+      }
+    });
   }
   public static getUserDocument(){
     return AppComponent.userDocument;
@@ -74,7 +79,7 @@ export class AppComponent {
               this.userHasProfile = result.exists; 
               AppComponent.userDocument.userId = this.auth.getAuth().currentUser.uid;
               if(this.userHasProfile) {
-                this.router.navigate(["postfeed"]);
+                this.router.navigate(["/postfeed"]);
                 resolved(1);
               } else {
                 resolved(0);
@@ -95,12 +100,15 @@ export class AppComponent {
   back(){
     this.location.back();
   }
+
   loggedIn(){
     return this.auth.isSignedIn();
   }
 
   onLoginClick(){
     this.islogginClick=true;
+    this.router.navigate(['login']);
+    location.reload();
   }
 }
 
