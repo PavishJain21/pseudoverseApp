@@ -8,10 +8,16 @@ import { Router } from '@angular/router';
 })
 export class TabsPage {
 
-  constructor(private router:Router) {}
-  goToCreatePostPage()
-  {  this.router.navigate(['/postfeed/createpost'])
-  
+  constructor(private router: Router) { }
+  goToCreatePostPage() {
+    this.router.navigate(['/postfeed/createpost'])
 
+
+  }
+  goToProfile(){
+    this.router.navigateByUrl('/profile');
+  }
+  goToHomePage(){
+    this.router.navigateByUrl('/postfeed');
   }
 }

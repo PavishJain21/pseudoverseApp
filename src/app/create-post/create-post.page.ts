@@ -16,12 +16,15 @@ import { Location } from '@angular/common';
 export class CreatePostPage implements OnInit {
   selectedImageFile :File;
   postContent:string='';
+  selectedCategory:string='';
   auth = new FirebaseTSAuth();
+  category:Category[]=[];
   firestore = new FirebaseTSFirestore();
   storage = new FirebaseTSStorage();
   constructor(private router:Router,private location:Location) { }
 
   ngOnInit(): void {
+    this.getCategory();
   }
 
   onPostClick() {
@@ -34,6 +37,29 @@ export class CreatePostPage implements OnInit {
     }
    
   }
+
+  getCategory(){
+    this.firestore.getCollection(
+      {
+        path: ["Category"],
+        where: [
+        ],
+        onComplete: (result) => {
+          result.docs.forEach(
+            doc => {
+              let category = <Category>doc.data();
+              category.Id = doc.id;
+              this.category.push(category);
+            }
+          );
+        },
+        onFail: err => {
+
+        }
+      }
+    );
+  }
+
   back(){
     this.location.back();
   }
@@ -54,6 +80,7 @@ export class CreatePostPage implements OnInit {
                 comment: comment,
                 creatorId: this.auth.getAuth().currentUser.uid,
                 imageUrl: downloadUrl,
+                category:this.selectedCategory,
                 timestamp: FirebaseTSApp.getFirestoreTimestamp(),
               },
               onComplete: (docId) => {
@@ -73,10 +100,12 @@ export class CreatePostPage implements OnInit {
         data: {
           comment: this.postContent,
           creatorId: this.auth.getAuth().currentUser.uid,
+          category:this.selectedCategory,
           timestamp: FirebaseTSApp.getFirestoreTimestamp()
         },
         onComplete: (docId) => {
           this.postContent='';
+          this.router.navigate(['/postfeed']);
         }
       }
     );
@@ -97,3 +126,10 @@ export class CreatePostPage implements OnInit {
     );
   }
 }
+
+export interface Category {
+  Id:string;
+  Name:string;
+  Value:string;
+  }
+  

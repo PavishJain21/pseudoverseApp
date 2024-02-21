@@ -35,6 +35,6 @@
    </ion-header>
   <ion-app>
     <ion-router-outlet></ion-router-outlet>
-    <app-tabs *ngIf="loggedIn()"></app-tabs>
+    <app-tabs *ngIf="loggedIn() && !hideTab"></app-tabs> 
   </ion-app>
 

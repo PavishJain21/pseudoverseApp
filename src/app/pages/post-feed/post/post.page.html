@@ -23,7 +23,10 @@
   <ion-avatar>
     <img class="img-user" src="../../../../assets/icon/user.png">
   </ion-avatar>
-  <p>{{creatorName }}</p>
+  <h3>{{creatorName }}</h3>
+  <ion-label class="">
+    <p class="categoy">{{ postData?.category}}</p>
+  </ion-label>
 </ion-item>
 <ion-item *ngIf="postData?.imageUrl" class="post-item">
   <ion-img src="{{postData?.imageUrl}}"></ion-img>

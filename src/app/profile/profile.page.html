@@ -1,0 +1,15 @@
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Full Name</ion-label>
+      <ion-input #nameInput [(ngModel)]="user.publicName"  placeholder="Enter your full name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">About you</ion-label>
+      <ion-input #descriptionInput  [(ngModel)]="user.description"  type="text" placeholder="Enter Description .."></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="onContinueClick(nameInput, descriptionInput)">Save Profile</ion-button>
+</ion-content>

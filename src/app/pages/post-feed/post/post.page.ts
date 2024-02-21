@@ -62,7 +62,8 @@ export class PostPage implements OnInit {
       userName:this.creatorName,
       content:this.postData?.comment,
       postId:this.postData.postId,
-      imageUrl:this.postData?.imageUrl
+      imageUrl:this.postData?.imageUrl,
+      category:this.postData?.category
     }
     var data=JSON.stringify(obj);
     this.redirectToPost.emit(data);

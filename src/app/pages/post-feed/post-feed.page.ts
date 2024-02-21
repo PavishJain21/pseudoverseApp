@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FirebaseTSAuth } from 'firebasets/firebasetsAuth/firebaseTSAuth';
-import { FirebaseTSFirestore, Limit, OrderBy } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
+import { FirebaseTSFirestore, Limit, OrderBy, Where } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import { NgNavigatorShareService } from 'ng-navigator-share';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post-feed',
@@ -67,8 +68,36 @@ export class PostFeedPage implements OnInit {
     localStorage.setItem('postData',$event);
      this.router.navigate(['postfeed/feed']);
   }
+  
+  onSearch($event){
+    this.getPostsByCategory($event.detail.value);
+  }
 
+  getPostsByCategory(category: string){
+    this.firestore.getCollection(
+      {
+        path: ["Posts"],
+        where: [
+          new Where("category","==",category),
+          new OrderBy("timestamp", "desc"),
+          new Limit(10)
+        ],
+        onComplete: (result) => {
+          result.docs.forEach(
+            doc => {
+              let post = <PostData>doc.data();
+              post.postId = doc.id;
+              this.posts.push(post);
+            }
+          );
+        },
+        onFail: err => {
 
+        }
+      }
+    );
+  }
+  
 }
 
 export interface PostData {
@@ -76,5 +105,6 @@ export interface PostData {
   creatorId: string;
   imageUrl?: string;
   postId: string;
+  category?:string;
 }
 

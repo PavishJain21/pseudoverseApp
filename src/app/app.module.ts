@@ -17,8 +17,8 @@ import { environment } from 'src/environments/environment';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TabsPage } from './tabs/tabs.page';
 @NgModule({
-  declarations: [AppComponent,AuthenticatorPage,ResendEmailPage,TabsPage],
-  exports:[ AuthenticatorPage,ResendEmailPage,TabsPage],
+  declarations: [AppComponent,ResendEmailPage,TabsPage],
+  exports:[ ResendEmailPage,TabsPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,

@@ -17,7 +17,8 @@ export class AppComponent {
   userHasProfile = true;
   islogginClick=false;
   path:string='';
-  private static userDocument: UserDocument;
+  hideTab:boolean=false;
+  public static userDocument: UserDocument;
 
   constructor(
       private router: Router,
@@ -54,6 +55,8 @@ export class AppComponent {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
         this.path=event.url;
+        if(event.url.includes('createpost')){
+        }
       }
     });
   }
@@ -76,14 +79,16 @@ export class AppComponent {
             path: ["Users", this.auth.getAuth().currentUser.uid],
             onUpdate: (result) => {
               AppComponent.userDocument = <UserDocument>result.data();
+              localStorage.setItem('userInfo',JSON.stringify( AppComponent.userDocument ));
               this.userHasProfile = result.exists; 
               AppComponent.userDocument.userId = this.auth.getAuth().currentUser.uid;
-              if(this.userHasProfile) {
-                this.router.navigate(["/postfeed"]);
-                resolved(1);
-              } else {
-                resolved(0);
-              }
+              // if(this.userHasProfile && !this.router.url.includes('profile')) {
+              //   this.router.navigate(["/postfeed"]);
+              //   resolved(1);
+              // } else if(!this.router.url.includes('profile')){
+              //   this.router.navigate(["/profile"]);
+              //   resolved(0);
+              // }
             }
           }
         );

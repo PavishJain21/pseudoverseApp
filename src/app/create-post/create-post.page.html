@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
      <ion-title>
          Create Post
@@ -10,8 +10,12 @@
        </ion-button>
      </ion-buttons>
    </ion-toolbar>
- </ion-header>
+ </ion-header> -->
 <ion-content class="ion-padding">
+  <!-- <ion-label>Choose an Category</ion-label> -->
+  <ion-select placeholder="Choose Category" [(ngModel)]="selectedCategory">
+    <ion-select-option *ngFor="let item of category" [value]="item.Name">{{item.Name}}</ion-select-option>
+  </ion-select>
   <ion-item>
     <ion-label position="stacked">Post</ion-label>
     <ion-textarea [(ngModel)]="postContent" placeholder="What's on your mind?"></ion-textarea>

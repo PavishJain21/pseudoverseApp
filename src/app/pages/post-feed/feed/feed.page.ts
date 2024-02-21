@@ -41,6 +41,10 @@ export class FeedPage implements OnInit {
       } 
     );
   }
+
+
+
+
   likePost(){}
 
   sharePost(){}
@@ -55,3 +59,4 @@ export interface Comment {
   comment: string;
   timestamp: firebase.default.firestore.Timestamp
 }
+
